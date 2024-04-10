@@ -1,14 +1,13 @@
 import { prisma } from '@/lib/prisma'
 import { compare } from 'bcrypt'
-import NextAuth, { type NextAuthOptions } from 'next-auth'
+import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-
-export const authOptions: NextAuthOptions = {
+export const authOptions = {
   session: {
     strategy: 'jwt'
   },
   pages: {
-    signIn: '/signin', // Path to your custom sign-in page
+    signIn: '/signin',
   },
   providers: [
     CredentialsProvider({
@@ -53,31 +52,6 @@ export const authOptions: NextAuthOptions = {
       }
     })
   ],
-  callbacks: {
-    session: ({ session, token }) => {
-      console.log('Session Callback', { session, token })
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          randomKey: token.randomKey
-        }
-      }
-    },
-    jwt: ({ token, user }) => {
-      console.log('JWT Callback', { token, user })
-      if (user) {
-        const u = user as unknown as any
-        return {
-          ...token,
-          id: u.id,
-          randomKey: u.randomKey
-        }
-      }
-      return token
-    }
-  }
 }
 
 const handler = NextAuth(authOptions)
