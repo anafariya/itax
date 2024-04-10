@@ -72,7 +72,7 @@ export default function SignIn() {
             </button>
           </div>
           <p className="text-sm text-gray-900">
-          Don't have an account?
+          Do not have an account?
           <Link href="/signup">
             <button className="text-blue-600 hover:text-blue-800 pl-1">Sign up</button>
           </Link>
