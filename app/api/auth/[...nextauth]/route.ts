@@ -2,7 +2,7 @@ import { prisma } from '@/lib/prisma'
 import { compare } from 'bcrypt'
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-export const authOptions = {
+export const authOptions:NextAuthOptions = {
   session: {
     strategy: 'jwt'
   },
